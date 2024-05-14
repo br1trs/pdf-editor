@@ -1,7 +1,0 @@
-
-’csharpsquid:S3247X"HReplace this type-check-and-cast sequence with an 'as' and a null check.(•‡ñã8ÓâŠ·õ1J$292c682d-855f-4798-807e-5f6f27387ef0
-Šcsharpsquid:S1854"@Remove this useless assignment to local variable 'sceneTexture'.(—­øé8ÔâŠ·õ1J$da909a08-c881-4c25-bd39-71b7415a2d7f
-{csharpsquid:S3903",Move 'PageContainer' into a named namespace.(¼§½àùÿÿÿÿ8ÔâŠ·õ1J$db0cb072-1755-4fbd-aa9c-1e23881cc83e
-‡csharpsquid:S3267V"8Loops should be simplified using the "Where" LINQ method(ÿ½¿öýÿÿÿÿ8ÔâŠ·õ1J$67dd9295-993e-4353-b356-c2d3a8cd542c
-‰csharpsquid:S10753"?Refactor your code not to use hardcoded absolute paths or URIs.(²‘·š8öÅŽ«÷1J$9d63ef63-9659-4ece-be09-5726fb344b19
-}csharpsquid:S14813"3Remove the unused local variable 'movingPageScene'.(²‘·š8þ‚ó¬÷1J$d8fea035-9ece-49d4-8a04-b1f4c4dd104b
