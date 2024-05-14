@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://0qlhey8w37mq"]
+
+[ext_resource type="Texture2D" uid="uid://bj2e6s4krlmfv" path="res://Assets/remove-file.png" id="1_ojs1l"]
+[ext_resource type="Script" path="res://MovingPage.cs" id="2_8arn2"]
+
+[node name="TextureRect" type="TextureRect"]
+custom_minimum_size = Vector2(200, 300)
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ojs1l")
+expand_mode = 5
+stretch_mode = 5
+script = ExtResource("2_8arn2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

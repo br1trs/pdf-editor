@@ -1,0 +1,135 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdjwwan437i1o"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_1aiko"]
+[ext_resource type="PackedScene" uid="uid://bmdat5ocy762a" path="res://StartMenu.tscn" id="1_v5aie"]
+[ext_resource type="ButtonGroup" uid="uid://nxpda548nf2m" path="res://EditorOptionsGroup.tres" id="2_38oxr"]
+[ext_resource type="Script" path="res://PagesController.cs" id="3_d8ofy"]
+[ext_resource type="PackedScene" uid="uid://3co14m872t4g" path="res://preview.tscn" id="4_v15i5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10prw"]
+bg_color = Color(0.691193, 0.580795, 0.429964, 1)
+
+[sub_resource type="Theme" id="Theme_ux74u"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("pdfGrid", "saveDialog")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1aiko")
+pdfGrid = NodePath("VBoxContainer/Panel2/PanelContainer/HBoxContainer/ScrollContainer/GridContainer")
+saveDialog = NodePath("SaveFileDialog")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button2" type="Button" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Open"
+
+[node name="Button" type="Button" parent="VBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="Panel2" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 607.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_10prw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Panel2/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="DELETE" type="Button" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_38oxr")
+text = "DELETE PAGES"
+
+[node name="Button2" type="Button" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("2_38oxr")
+text = "ARRANGE 
+PAGES"
+
+[node name="Button3" type="Button" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "ORGANIZE PAGES"
+text_overrun_behavior = 2
+autowrap_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(630, 0)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+columns = 3
+script = ExtResource("3_d8ofy")
+
+[node name="Preview" parent="VBoxContainer/Panel2/PanelContainer/HBoxContainer" instance=ExtResource("4_v15i5")]
+layout_mode = 2
+
+[node name="OpenFileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(1000, 500)
+visible = true
+min_size = Vector2i(1000, 500)
+theme = SubResource("Theme_ux74u")
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.pdf; PDF Files")
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+auto_translate_mode = 1
+initial_position = 2
+size = Vector2i(1000, 500)
+popup_window = true
+min_size = Vector2i(1000, 500)
+theme = SubResource("Theme_ux74u")
+ok_button_text = "Save"
+access = 2
+filters = PackedStringArray("*.pdf; PDF Files")
+
+[node name="ConfirmationDialog" parent="." instance=ExtResource("1_v5aie")]
+visible = false
+
+[connection signal="pressed" from="VBoxContainer/Panel/HBoxContainer/Button" to="." method="OnSaveButtonPressed"]
+[connection signal="toggled" from="VBoxContainer/Panel2/PanelContainer/HBoxContainer/VBoxContainer/DELETE" to="." method="OnDeletePageModePressed"]
+[connection signal="toggled" from="VBoxContainer/Panel2/PanelContainer/HBoxContainer/VBoxContainer/Button2" to="." method="OnOrganizePagesPressed"]
+[connection signal="file_selected" from="OpenFileDialog" to="." method="OnFileSelected"]
+[connection signal="file_selected" from="SaveFileDialog" to="." method="OnSaveDialogFileSelected"]

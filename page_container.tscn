@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://ddum810xqtfg"]
+
+[ext_resource type="Script" path="res://PageContainer.cs" id="1_6457j"]
+[ext_resource type="Texture2D" uid="uid://bj2e6s4krlmfv" path="res://Assets/remove-file.png" id="1_ybbx1"]
+[ext_resource type="Texture2D" uid="uid://cj8laanfbfaio" path="res://Assets/close.png" id="3_8f6xx"]
+[ext_resource type="Texture2D" uid="uid://fti852guiru1" path="res://UI/UIpack_vector.svg" id="5_csmfm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eneol"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuiiw"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0awdr"]
+atlas = ExtResource("5_csmfm")
+region = Rect2(1007, 449, 39, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_177mc"]
+atlas = ExtResource("5_csmfm")
+region = Rect2(1007, 510, 39, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3kvg"]
+atlas = ExtResource("5_csmfm")
+region = Rect2(1007, 510, 39, 28)
+
+[node name="PageContainer" type="Panel" node_paths=PackedStringArray("textureRect", "deletePageButton", "pageNumberLabel", "moveToLeftButton", "moveToRightButton")]
+custom_minimum_size = Vector2(200, 300)
+theme_override_styles/panel = SubResource("StyleBoxFlat_eneol")
+script = ExtResource("1_6457j")
+textureRect = NodePath("MarginContainer/TextureRect")
+deletePageButton = NodePath("Delete Page")
+pageNumberLabel = NodePath("PageNumberLabel")
+moveToLeftButton = NodePath("MoveToLeft")
+moveToRightButton = NodePath("MoveToRight")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_ybbx1")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Delete Page" type="TextureButton" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+texture_pressed = ExtResource("3_8f6xx")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="Delete Page"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 3.305
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kuiiw")
+
+[node name="PanelContainer2" type="PanelContainer" parent="Delete Page"]
+visible = false
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kuiiw")
+
+[node name="PanelContainer3" type="PanelContainer" parent="Delete Page"]
+visible = false
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kuiiw")
+
+[node name="PanelContainer4" type="PanelContainer" parent="Delete Page"]
+visible = false
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 3.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kuiiw")
+
+[node name="MoveToLeft" type="TextureButton" parent="."]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_0awdr")
+texture_hover = SubResource("AtlasTexture_177mc")
+
+[node name="MoveToRight" type="TextureButton" parent="."]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_0awdr")
+texture_hover = SubResource("AtlasTexture_j3kvg")
+flip_h = true
+
+[node name="PageNumberLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.5
+offset_top = -40.0
+offset_right = 41.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "[center]Page 1"
+fit_content = true
+scroll_active = false
+
+[connection signal="toggled" from="Delete Page" to="." method="OnDeletePageToggled"]
+[connection signal="pressed" from="MoveToLeft" to="." method="OnMoveToLeftPressed"]
+[connection signal="pressed" from="MoveToRight" to="." method="OnMoveToRightPressed"]
